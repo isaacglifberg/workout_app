@@ -1,0 +1,70 @@
+
+
+{%load static%}
+
+<title>Log in</title>
+
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">      
+
+
+
+    <div class="flex-container">
+        <div class="column-1">
+            <img src= {%static 'img/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg'%} alt="">
+        </div>
+        <div class="column-2">
+            <a href="{% url 'signin' %}">
+                <div class="column2_info">
+                    <img src= {%static 'img/icons8-male-user-50.png'%} width="25px" alt="">
+                    <strong>Log in</strong>
+                </div>
+            </a>
+            <a href="{% url 'signup' %}">
+                <div class="column2_info">
+                    <img src={%static 'img/icons8-add-user-male-50.png'%} width="25px" alt="">
+                    <strong>Sign up</strong>
+                </div>
+            </a>
+            <a href="{% url 'password_reset' %}">
+                <div class="column2_info">
+                    <img src={% static 'img/icons8-secure-50.png'%} width="25px" alt="">
+                    <strong>Forgot password?</strong>
+                </div>
+            </a>
+        </div>
+        <div class="column-3">
+            <div class="form_title">
+                Log in here
+            </div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="login_form">
+                    <div class="username_form">
+                        <input type="text" name="username" placeholder="Username" />
+                    </div>
+                    <div class="password_form">
+                        <input type="password" name="password" placeholder="Password" />
+                    </div>
+                    <div class="button_form">
+                        <button type="submit">Log in</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {%if error_message%}
+        <div class="column-4">
+            <div class="error">
+                <ul>
+                {% if error_message %}
+                    <li>
+                        {{error_message}}
+                    </li>
+                {%endif%}
+                </ul>
+            </div> 
+        </div>
+        {%endif%}
+    </div>
+    <div class="background_img">
+        <img src={% static 'img/risen-wang-20jX9b35r_M-unsplash.jpg' %} alt="gym">
+    </div>

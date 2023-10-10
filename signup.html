@@ -1,0 +1,91 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">      
+
+<div class="flex-container">
+    <div class="column-1">
+        <img src="{% static 'img/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg' %}" alt="">
+    </div>
+    <div class="column-2">
+        <a href="{% url 'signin' %}">
+            <div class="column2_info">
+                <img src="{% static 'img/icons8-male-user-50.png' %}" width="25px" alt="">
+                <strong>Signin</strong>
+            </div>
+        </a>
+        <a href="{% url 'signup' %}">
+            <div class="column2_info">
+                <img src="{% static 'img/icons8-add-user-male-50.png' %}" width="25px" alt="">
+                <strong>Signup</strong>
+            </div>
+        </a>
+        <a href="{% url 'signup' %}">
+            <div class="column2_info">
+                <img src="{% static 'img/icons8-secure-50.png' %}" width="25px" alt="">
+                <strong>Forgot password?</strong>
+            </div>
+        </a>
+    </div>
+    <div class="column-3">
+        <div class="form_title">
+            Signup Here
+        </div>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="login_form">
+                <div class="error">
+                    {% if error_message %}
+                        {{ error_message }}
+                    {% endif %}
+                </div>
+                <div class="username_form">
+                    <input type="text" name="username" placeholder="Username" />
+                </div>
+                <div class="fname_form">
+                    <input type="text" name="fname" placeholder="First name" />
+                </div>
+                <div class="lname_form">
+                    <input type="text" name="lname" placeholder="Last name" />
+                </div>
+                <div class="email_form">
+                    <input type="text" name="email" placeholder="Email" />
+                </div>
+                <div class="weight_form">
+                    <input type="number" name="weight" placeholder="Weight" />
+                </div>
+                <div class="birth_date_form">
+                    <input type="date" name="birth_date" placeholder="Birth Date" />
+                </div>
+                <div class="password_form">
+                    <input type="password" name="password" placeholder="Password" />
+                </div>
+                <div class="button_form">
+                    <button type="submit">Signup</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if errors %}
+    <div class="column-4">
+        <ul>
+            {% for value in errors.values %}
+            <li>
+                {{ value }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+<div class="background_img">
+    <img src="{% static 'img/risen-wang-20jX9b35r_M-unsplash.jpg' %}" alt="gym">
+</div>
+
+
+    
+
+
+
+
+
+
+

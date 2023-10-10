@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{%load static%}
+
+
+
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+
+{% block content %}
+<title>Log workout</title>
+  <div class="grid_images">
+      <div class="first_row">
+          <div class="first_row_first_img">
+              <img src= {%static 'img/6500_2_09.jpg'%} alt="">
+          </div>
+          <div class="first_row_second_img">
+              <img src= {%static 'img/1297.jpg'%} alt="">
+          </div>
+          <div class="first_row_third_img">
+            <img src= {%static 'img/gym_02.jpg'%} alt="">
+        </div>
+      </div>
+      <div class="second_row">
+        <div class="second_row_first_img">
+            <img src= {%static 'img/4887681.jpg'%} alt="">
+        </div>
+        <div class="second_row_second_img">
+            <img src= {%static 'img/gym_04.jpg'%} alt="">
+        </div>
+        <div class="second_row_third_img">
+          <img src= {%static 'img/1200.jpg'%} alt="">
+      </div>
+    </div>
+
+    
+    <div class="start_workout_container">
+      {% if error_message %}
+          <div class="alert alert-danger h-100 ">{{ error_message }}</div>
+      {% endif %}
+      <form method="POST" action="{% url 'start_workout' %}">
+        {% csrf_token %}
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button"  disabled id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select exercises
+          </button>
+          <div class="dropdown-menu dropdown-menu-scrollable w-100 overflow-auto" aria-labelledby="dropdownMenuButton"  style="max-height: 320px; ">
+            <div class="form-group">
+              {% for x in exercises %}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="exercise{{ x.id }}" name="exercises" value="{{ x.id }}">
+                  <label class="form-check-label" for="exercise{{ x.id }}">{{ x.name }} {{ x.equipment }}</label>
+                  <hr class="dropdown-divider">
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <button type="submit" name="exercise" class="btn btn-dark">Start Workout</button>
+      </form> 
+      {% if errors %}
+          <div class="alert alert-danger h-100 ">{{ errors }}</div>
+      {% endif %}
+      <div class="add_exercise">
+        <div class="text">
+          Add exercises
+        </div>
+          <form method="POST" action="{% url 'add_exercise' %}" >
+            {% csrf_token %}
+            <div class="form-values">
+              <select name="body_part" id="body_part">
+                  <option value="" disabled selected hidden>Body part</option>
+                  <option>Forearms</option>
+                  <option>Triceps</option>
+                  <option>Biceps</option>
+                  <option>Neck</option>
+                  <option>Chest</option>
+                  <option>Back</option>
+                  <option>Core</option>
+                  <option>Upper Legs</option>
+                  <option>Glutes</option>
+                  <option>Calves</option>
+                  <option>Full Body</option>
+                  <option>Other</option>
+              </select>
+              <select name="equipment" id="equipment" >
+                  <option value="" disabled selected hidden>Equipment</option>
+                  <option >Barbell</option>
+                  <option >Dumbell</option>
+                  <option >Bodyweight</option>
+                  <option >Machine</option>
+                  <option >Other</option>
+                 
+              </select>
+                  <input type="text" id="name" name="name" placeholder="Name">
+                  <textarea class=" mb-2" id="description" name="description" rows="4" placeholder="Enter description" ></textarea>
+                  <button type="submit" name="exercise" class="btn btn-dark"  style="width: 220px;">Add</button>
+
+                
+            </div>
+            
+          </form> 
+         
+      </div>
+
+      
+    </div>
+    
+    
+{% endblock %}
